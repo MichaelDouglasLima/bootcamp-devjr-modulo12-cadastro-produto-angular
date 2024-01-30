@@ -5,32 +5,32 @@
 
     <div class="row">
         <div class="col-md-10 offset-md-1">
-            <form #formProduct="ngForm">
+            <form [formGroup]="formGroupProduct">
                 <div *ngIf="product.id" class="row mb-3 mt-3">
                     <label for="inputId" class="col-sm-2 col-form-label">ID:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="id" id="inputId" required [(ngModel)]="product.id" disabled>
+                        <input type="text" class="form-control" name="id" id="inputId" formControlName="id" readonly>
                     </div>
                 </div>
 
                 <div class="row mb-3 mt-3">
                     <label for="inputName" class="col-sm-2 col-form-label">Nome:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" id="inputName" required [(ngModel)]="product.name">
+                        <input type="text" class="form-control" name="name" id="inputName" formControlName="name">
                     </div>
                 </div>
 
                 <div class="row mb-3 mt-3">
                     <label for="inputDescription" class="col-sm-2 col-form-label">Descrição:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="description" id="inputDescription" required [(ngModel)]="product.description">
+                        <input type="text" class="form-control" name="description" id="inputDescription" formControlName="description">
                     </div>
                 </div>
 
                 <div class="row mb-3 mt-3">
                     <label for="inputPrice" class="col-sm-2 col-form-label">Preço:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="price" id="inputPrice" required [(ngModel)]="product.price">
+                        <input type="text" class="form-control" name="price" id="inputPrice" formControlName="price">
                     </div>
 
                     <label for="selectCategory" class="col-sm-2 col-form-label">Categoria:</label>
@@ -39,8 +39,7 @@
                                 aria-label="Selecione uma categoria"
                                 name="category"
                                 id="selectCategory"
-                                required 
-                                [(ngModel)]="product.category"
+                                formControlName="category"
                                 [compareWith]="selectedCategory"
                         >
                             <!-- <option value="" selected>Escolha:</option> -->
@@ -55,14 +54,14 @@
                     <label class="col-sm-2 col-form-label">Opções:</label>
                     <div class="col-sm-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="promotion" id="checkBoxPromotion" [(ngModel)]="product.promotion">
+                            <input class="form-check-input" type="checkbox" value="" name="promotion" id="checkBoxPromotion" formControlName="promotion">
                             <label class="form-check-label" for="checkBoxPromotion">
                                 Promoção
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="newProduct" id="checkBoxNewProduct" [(ngModel)]="product.newProduct">
+                            <input class="form-check-input" type="checkbox" value="" name="newProduct" id="checkBoxNewProduct" formControlName="newProduct">
                             <label class="form-check-label" for="checkBoxNewProduct">
                                 Lançamento
                             </label>
@@ -72,7 +71,7 @@
 
                 <div class="row mb-3 mt-3">
                     <div class="col-sm-4">
-                        <button type="submit" class="btn btn-primary me-1" (click)="save()" [disabled]="formProduct.invalid">Salvar</button>
+                        <button type="submit" class="btn btn-primary me-1" (click)="save()" [disabled]="formGroupProduct.invalid">Salvar</button>
                         <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                     </div>
                 </div>
