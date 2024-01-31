@@ -1,40 +1,50 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Category } from '../../interfaces/Category';
 import { Product } from '../../interfaces/Product';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
-  
-  @Input()
-  categories : Category[] = [];
+export class ProductComponent implements OnChanges {
 
   @Input()
-  product ?: Product;
+  categories: Category[] = [];
+
+  @Input()
+  product: Product = {} as Product;
 
   @Output()
   saveEmitter = new EventEmitter();
 
-  formGroupProduct : FormGroup;
+  formGroupProduct: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroupProduct = this.formBuilder.group({
-      id : [''],
-      name : [''],
-      description : [''],
-      category : [''],
-      price : [''],
-      newProduct : [''],
-      promotion : ['']
+      id: {value:null, disabled:true},
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      newProduct: [''],
+      promotion: ['']
     })
   }
 
+  ngOnChanges(): void {
+    if (this.product.id) {
+      this.formGroupProduct.setValue(this.product);
+    }
+  }
+
   save() {
+    if (this.formGroupProduct.valid) {
+      Object.assign(this.product, this.formGroupProduct.value);
     this.saveEmitter.emit(true);
+    }
+    
   }
 
   cancel() {
@@ -45,4 +55,5 @@ export class ProductComponent {
     return category1 && category2 ? category1.id === category2.id : false;
   }
 
+  get pfgName() { return this.formGroupProduct.get("name") }
 }
