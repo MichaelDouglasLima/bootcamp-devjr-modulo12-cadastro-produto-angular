@@ -18,8 +18,10 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="name" id="inputName" formControlName="name">
                         <div *ngIf="ngFormProduct.submitted">
-                            <small *ngIf="pfgName?.errors?.['required']" class="form-text text-danger">*Nome é requirido!</small>
-                            <small *ngIf="pfgName?.errors?.['minlength']" class="form-text text-danger">*Tamanho mínimo de 3 caracteres!</small>
+                            <small *ngIf="pfgName?.errors?.['required']" class="form-text text-danger">*Nome é
+                                requirido!</small>
+                            <small *ngIf="pfgName?.errors?.['minlength']" class="form-text text-danger">*Tamanho mínimo
+                                de 3 caracteres!</small>
                         </div>
                     </div>
                 </div>
@@ -29,6 +31,9 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="description" id="inputDescription"
                             formControlName="description">
+                        <div *ngIf="ngFormProduct.submitted">
+                            <small *ngIf="pfgDescription?.errors?.['required']" class="form-text text-danger">*Descrição é requirida!</small>
+                        </div>
                     </div>
                 </div>
 
@@ -36,6 +41,9 @@
                     <label for="inputPrice" class="col-sm-2 col-form-label">Preço:</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="price" id="inputPrice" formControlName="price">
+                        <div *ngIf="ngFormProduct.submitted">
+                            <small *ngIf="pfgPrice?.errors?.['required']" class="form-text text-danger">*Preço é requirido!</small>
+                        </div>
                     </div>
 
                     <label for="selectCategory" class="col-sm-2 col-form-label">Categoria:</label>
@@ -47,6 +55,9 @@
                                 {{cat.name}}
                             </option>
                         </select>
+                        <div *ngIf="ngFormProduct.submitted">
+                            <small *ngIf="pfgCategory?.errors?.['required']" class="form-text text-danger">*Categoria é requirida!</small>
+                        </div>
                     </div>
                 </div>
 

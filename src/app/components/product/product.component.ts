@@ -56,4 +56,10 @@ export class ProductComponent implements OnChanges {
   }
 
   get pfgName() { return this.formGroupProduct.get("name") }
+
+  get pfgDescription() { return this.formGroupProduct.get("description") }
+
+  get pfgPrice() { return this.formGroupProduct.get("price") }
+
+  get pfgCategory() { return this.formGroupProduct.get("category") }
 }
